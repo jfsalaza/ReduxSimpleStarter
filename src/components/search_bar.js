@@ -8,7 +8,7 @@ class SearchBar extends Component {
     constructor(props){
         super(props);
 
-        this.state = {term: 'Starting Value'};
+        this.state = {term: ''};
     }
 
     //Controlled field is a form element whos value is set by the state
@@ -22,18 +22,20 @@ class SearchBar extends Component {
         //Reference javascript value, in this case state, using this.state.variable
         //input is a controlled component so input changes when state changes
         return(
-            <div>
+            <div className = "search-bar">
                 <input 
                     value = {this.state.term}
-                    onChange = {(event) => this.setState({term: event.target.value})} />
+                    onChange = {(event) => this.onInputChange(event.target.value)} />
             </div>
         );
     }
 
-    //This is an input handler
-    // onInputChange(event){
-    //     console.log(event.target.value);
-    // }
+
+    onInputChange(term){
+        this.setState({term});
+        this.props.onSearchTermChange(term);
+
+    }
 
 }
 
